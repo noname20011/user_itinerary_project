@@ -1,4 +1,4 @@
-package domain.travel.travel_itinerary.helper.utils.enum_validation;
+package domain.travel.travel_itinerary.helper.validators.enum_validation;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;

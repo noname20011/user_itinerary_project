@@ -1,7 +1,6 @@
 package domain.travel.travel_itinerary.service.helper;
 
-import domain.travel.travel_itinerary.dto.destination.DestinationRequestDTO;
-import domain.travel.travel_itinerary.dto.destination_photo.DestinationPhotoRequestDTO;
+import domain.travel.travel_itinerary.helper.dto.FilePhotoDTO;
 import domain.travel.travel_itinerary.service.CloudinaryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Async;
@@ -16,7 +15,7 @@ public class AsyncService {
     private final CloudinaryService cloudinaryService;
 
     @Async("uploadPhotoExecutor")
-    public CompletableFuture<String> uploadPhoto(DestinationPhotoRequestDTO requestDTO) {
+    public CompletableFuture<String> uploadPhoto(FilePhotoDTO requestDTO) {
         String url = cloudinaryService.uploadPhoto(requestDTO.getFilePhoto());
         return CompletableFuture.completedFuture(url);
     }
@@ -26,4 +25,5 @@ public class AsyncService {
         cloudinaryService.deleteDestinationPhoto(url);
         CompletableFuture.completedFuture(null);
     }
+
 }

@@ -1,10 +1,9 @@
-package domain.travel.travel_itinerary.mapper.helper;
+package domain.travel.travel_itinerary.mapper.convert_helper;
 
 
 import domain.travel.travel_itinerary.domain.entity.Destination;
 import domain.travel.travel_itinerary.repository.DestinationRepository;
 import lombok.RequiredArgsConstructor;
-import org.mapstruct.Context;
 import org.mapstruct.Named;
 import org.springframework.stereotype.Component;
 

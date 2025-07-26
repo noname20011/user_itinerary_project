@@ -48,9 +48,11 @@ public class Destination extends BaseEntityHasId {
     private List<DestinationPhotos> photos;
 
     @OneToMany(mappedBy = "destination")
+    @JsonManagedReference
     private List<Visited> visiteds;
 
     @OneToMany(mappedBy = "destination")
+    @JsonManagedReference
     private List<WhiteList> whiteLists;
 
 //    public Destination setWithId (UUID id) {

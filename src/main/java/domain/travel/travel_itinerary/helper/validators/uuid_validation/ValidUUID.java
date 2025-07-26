@@ -1,8 +1,7 @@
-package domain.travel.travel_itinerary.helper.utils.uuid_validation;
+package domain.travel.travel_itinerary.helper.validators.uuid_validation;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
-import jakarta.validation.executable.ValidateOnExecution;
 
 import java.lang.annotation.*;
 

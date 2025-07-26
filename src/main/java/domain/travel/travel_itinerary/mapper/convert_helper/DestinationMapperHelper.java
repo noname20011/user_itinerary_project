@@ -1,4 +1,4 @@
-package domain.travel.travel_itinerary.mapper.helper;
+package domain.travel.travel_itinerary.mapper.convert_helper;
 
 import domain.travel.travel_itinerary.domain.entity.Province;
 import domain.travel.travel_itinerary.repository.ProvinceRepository;

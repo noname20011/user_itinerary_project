@@ -1,10 +1,10 @@
 package domain.travel.travel_itinerary.dto.destination_photo;
 
+import domain.travel.travel_itinerary.helper.dto.FilePhotoDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.Serializable;
 import java.util.UUID;
@@ -21,9 +21,9 @@ public class DestinationPhotoRequestDTO implements Serializable {
 
     private String photoUrl;
 
-    private MultipartFile filePhoto;
+    private FilePhotoDTO filePhoto;
 
-    public DestinationPhotoRequestDTO (UUID destinationId, MultipartFile filePhoto  ) {
+    public DestinationPhotoRequestDTO (UUID destinationId, FilePhotoDTO filePhoto  ) {
         this.filePhoto = filePhoto;
         this.destinationId = destinationId;
     }

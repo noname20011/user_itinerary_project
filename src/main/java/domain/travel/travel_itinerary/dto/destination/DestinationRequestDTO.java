@@ -1,8 +1,9 @@
 package domain.travel.travel_itinerary.dto.destination;
 
 import domain.travel.travel_itinerary.domain.enums.DestinationStatusEnum;
-import domain.travel.travel_itinerary.helper.utils.enum_validation.EnumPattern;
-import domain.travel.travel_itinerary.helper.utils.uuid_validation.ValidUUID;
+import domain.travel.travel_itinerary.helper.dto.FilePhotoDTO;
+import domain.travel.travel_itinerary.helper.validators.enum_validation.EnumPattern;
+import domain.travel.travel_itinerary.helper.validators.uuid_validation.ValidUUID;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;

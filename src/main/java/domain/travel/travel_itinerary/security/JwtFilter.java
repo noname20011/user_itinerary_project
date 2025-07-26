@@ -1,11 +1,14 @@
 package domain.travel.travel_itinerary.security;
 
+import domain.travel.travel_itinerary.domain.enums.RoleEnum;
+import jakarta.persistence.EntityManager;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.Session;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -22,12 +25,14 @@ public class JwtFilter extends OncePerRequestFilter {
 
     private final JwtProvider jwtProvider;
     private final UserDetailServiceImpl userService;
+    private final EntityManager em;
 
     @Override
     protected void doFilterInternal(
             @NotNull HttpServletRequest request,
             @NotNull HttpServletResponse response,
-            @NotNull FilterChain filterChain) throws ServletException, IOException {
+            @NotNull FilterChain filterChain
+    ) throws ServletException, IOException {
         try {
             String authToken = request.getHeader("Authorization");
             if (authToken != null && authToken.startsWith("Bearer ")) {
@@ -38,6 +43,14 @@ public class JwtFilter extends OncePerRequestFilter {
                     UsernamePasswordAuthenticationToken authentication =
                             new UsernamePasswordAuthenticationToken(result, null, result.getAuthorities());
 
+//                    Check role if role == client then get data no soft delete
+                    if(jwtProvider.getRole(token).equals(RoleEnum.CLIENT.toString())){
+                        Session session = em.unwrap(Session.class);
+                        session.enableFilter("deleteFilter").setParameter("isDeleted", false);
+                    } else {
+                        Session session = em.unwrap(Session.class);
+                        session.disableFilter("deleteFilter");
+                    }
                     SecurityContextHolder.getContext().setAuthentication(authentication);
                 }
             }
@@ -48,6 +61,10 @@ public class JwtFilter extends OncePerRequestFilter {
             response.getWriter().write("Unauthorized: " + e.getMessage());
             return;
         }
+
+//        Session session = em.unwrap(Session.class);
+//        session.enableFilter("deleteFilter").setParameter("isDeleted", false);
+
         filterChain.doFilter(request, response);
     }
 }

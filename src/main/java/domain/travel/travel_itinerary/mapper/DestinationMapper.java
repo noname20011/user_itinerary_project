@@ -4,7 +4,7 @@ import domain.travel.travel_itinerary.domain.entity.Destination;
 import domain.travel.travel_itinerary.dto.destination.DestinationRequestDTO;
 import domain.travel.travel_itinerary.dto.destination.DestinationResponseDTO;
 import domain.travel.travel_itinerary.helper.base.mapper.BaseMapper;
-import domain.travel.travel_itinerary.mapper.helper.DestinationMapperHelper;
+import domain.travel.travel_itinerary.mapper.convert_helper.DestinationMapperHelper;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.NullValuePropertyMappingStrategy;
