@@ -1,7 +1,7 @@
 package domain.travel.travel_itinerary.dto.user;
 
 import domain.travel.travel_itinerary.domain.enums.RoleEnum;
-import domain.travel.travel_itinerary.helper.utils.enum_validation.EnumPattern;
+import domain.travel.travel_itinerary.helper.validators.enum_validation.EnumPattern;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;

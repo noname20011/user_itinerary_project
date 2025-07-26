@@ -30,7 +30,6 @@ public class DestinationPhotoServiceImpl implements DestinationPhotoService {
     private final DestinationPhotoRepository destinationPhotoRepository;
     private final AsyncService asyncService;
     private final DestinationPhotosMapper destinationPhotosMapper;
-    private final CloudinaryService cloudinaryService;
 
     @Override
     public Page<DestinationPhotoResponseDTO> getDestinationPhotos(UUID destinationId, Pageable pageable) {
@@ -42,13 +41,13 @@ public class DestinationPhotoServiceImpl implements DestinationPhotoService {
         @Override
         public List<DestinationPhotos> addDestinationPhotos(UUID destinationId, List<DestinationPhotoRequestDTO> requestDTOs) {
             try {
-                if (requestDTOs == null || requestDTOs.isEmpty()) {;
+                if (requestDTOs == null || requestDTOs.isEmpty()) {
                     return new ArrayList<>();
                 }
 
 //                Async upload image to Cloudinary
                 List<CompletableFuture<String>> futures = requestDTOs.stream()
-                        .map(asyncService::uploadPhoto)
+                        .map(requestDTO -> asyncService.uploadPhoto(requestDTO.getFilePhoto()))
                         .toList();
 
 //                await to get all urls
@@ -82,12 +81,15 @@ public class DestinationPhotoServiceImpl implements DestinationPhotoService {
 //          Get all photo by destination
             List<DestinationPhotos> currentPhotos = destinationPhotoRepository.getAllByDestination_Id(destinationId);
 
+//            Get data saved photo from client
+            List<String> savedPhotos = requestDTOs.stream()
+                    .map(DestinationPhotoRequestDTO::getPhotoUrl)
+                    .filter(Objects::nonNull).toList();
+
 //            Get delete photo after user update
             List<DestinationPhotos> deletePhotos = currentPhotos.stream()
                     .filter(photo ->
-                            requestDTOs.stream()
-                                    .noneMatch(dto ->
-                                            Objects.equals(dto.getPhotoUrl(),photo.getPhotoUrl()))
+                            !savedPhotos.contains(photo.getPhotoUrl())
                     ).toList();
 
 //            Delete photo from DB after update
@@ -100,7 +102,7 @@ public class DestinationPhotoServiceImpl implements DestinationPhotoService {
 //            Get new photo by check request has multiple file
             List<DestinationPhotoRequestDTO> newPhotos = requestDTOs.stream()
                     .filter(image ->
-                            image.getFilePhoto() != null && !image.getFilePhoto().isEmpty()).toList();
+                            image.getFilePhoto() != null && !image.getFilePhoto().getFilePhoto().isEmpty()).toList();
 
             return addDestinationPhotos(destinationId, newPhotos);
         } catch (RuntimeException e) {

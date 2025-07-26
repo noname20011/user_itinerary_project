@@ -6,6 +6,7 @@ import domain.travel.travel_itinerary.dto.destination.DestinationRequestDTO;
 import domain.travel.travel_itinerary.dto.destination.DestinationResponseDTO;
 import domain.travel.travel_itinerary.dto.destination_photo.DestinationPhotoRequestDTO;
 import domain.travel.travel_itinerary.exception.NotFoundException;
+import domain.travel.travel_itinerary.helper.dto.FilePhotoDTO;
 import domain.travel.travel_itinerary.mapper.DestinationMapper;
 import domain.travel.travel_itinerary.repository.DestinationRepository;
 import domain.travel.travel_itinerary.repository.custom_repository.province.PagingResult;
@@ -16,7 +17,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -64,7 +64,7 @@ public class DestinationServiceImpl implements DestinationService {
         if(destinationRequestDTO.getFilePhotos() != null) {
             List<DestinationPhotoRequestDTO> photoRequestDTOS =
                     destinationRequestDTO.getFilePhotos().stream()
-                            .map(filePhoto -> new DestinationPhotoRequestDTO(result.getId(), filePhoto)).toList();
+                            .map(filePhoto -> new DestinationPhotoRequestDTO(result.getId(), new FilePhotoDTO(filePhoto))).toList();
             List<DestinationPhotos> responsePhotos = destinationPhotoService.addDestinationPhotos(result.getId(), photoRequestDTOS);
 //            Reset response Photo to destination
             result.setPhotos(responsePhotos);
@@ -75,36 +75,43 @@ public class DestinationServiceImpl implements DestinationService {
 
     @Override
     public List<DestinationResponseDTO> updateDestinations(UUID destinationId, List<DestinationRequestDTO> listDto) {
-        return listDto.stream().map(this::addDestination).collect(Collectors.toList());
+        return listDto.stream().map(dto
+                -> updateDestination(destinationId, dto)).toList();
     }
 
     @Override
     public DestinationResponseDTO updateDestination(UUID destinationId, DestinationRequestDTO dto) {
-        Destination  destination = destinationMapper.mapToEntity(dto);
         Destination result = getEntityDestination(destinationId);
 
         List<DestinationPhotoRequestDTO> photoRequestDTOS = new ArrayList<>();
 
         //      Check if add new files photo then add to list
-        if(!dto.getFilePhotos().isEmpty()) {
+        if(dto.getFilePhotos()!= null && !dto.getFilePhotos().isEmpty()) {
             photoRequestDTOS.addAll(dto.getFilePhotos().stream()
                             .map(filePhoto ->
-                                    new DestinationPhotoRequestDTO(result.getId(), filePhoto )).toList()
+                                    new DestinationPhotoRequestDTO(destinationId, new FilePhotoDTO(filePhoto) )).toList()
             );
         }
 //      Check if saving old photos then add to list
-        if(!dto.getPhotosUrl().isEmpty()){
+        if(dto.getPhotosUrl()!= null && !dto.getPhotosUrl().isEmpty()){
             photoRequestDTOS.addAll(dto.getPhotosUrl().stream()
                                     .map(filePhoto ->
-                                            new DestinationPhotoRequestDTO(result.getId(), filePhoto )).toList()
+                                            new DestinationPhotoRequestDTO(destinationId, filePhoto)).toList()
             );
         }
 
+//        Save new data
+        Destination  toEntity = destinationMapper.mapToEntity(dto);
+        Destination savedDestination = destinationRepository.update(destinationId, toEntity);
+
+        System.out.println(photoRequestDTOS);
+//        Save update photos
         List<DestinationPhotos> responsePhotos =
                 destinationPhotoService.updateDestinationPhotos(result.getId(), photoRequestDTOS);
 
+
         //            Reset response Photo to destination
-        result.setPhotos(responsePhotos);
+        savedDestination.setPhotos(responsePhotos);
         return destinationMapper.mapToResponseDto(result);
     }
 
