@@ -2,7 +2,7 @@ package domain.travel.travel_itinerary.service;
 
 import domain.travel.travel_itinerary.dto.visited.VisitedRequestDTO;
 import domain.travel.travel_itinerary.dto.visited.VisitedResponseDTO;
-import domain.travel.travel_itinerary.repository.custom_repository.province.PagingResult;
+import domain.travel.travel_itinerary.repository.custom_repository.PagingResult;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;

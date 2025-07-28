@@ -1,4 +1,4 @@
-package domain.travel.travel_itinerary.repository.custom_repository.province;
+package domain.travel.travel_itinerary.repository.custom_repository;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

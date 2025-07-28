@@ -8,7 +8,7 @@ import domain.travel.travel_itinerary.exception.DisabledException;
 import domain.travel.travel_itinerary.exception.NotFoundException;
 import domain.travel.travel_itinerary.mapper.ProvinceMapper;
 import domain.travel.travel_itinerary.repository.ProvinceRepository;
-import domain.travel.travel_itinerary.repository.custom_repository.province.PagingResult;
+import domain.travel.travel_itinerary.repository.custom_repository.PagingResult;
 import domain.travel.travel_itinerary.service.ProvinceService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;

@@ -9,7 +9,7 @@ import domain.travel.travel_itinerary.exception.NotFoundException;
 import domain.travel.travel_itinerary.helper.dto.FilePhotoDTO;
 import domain.travel.travel_itinerary.mapper.VisitedMapper;
 import domain.travel.travel_itinerary.repository.VisitedRepository;
-import domain.travel.travel_itinerary.repository.custom_repository.province.PagingResult;
+import domain.travel.travel_itinerary.repository.custom_repository.PagingResult;
 import domain.travel.travel_itinerary.service.VisitedPhotoService;
 import domain.travel.travel_itinerary.service.VisitedService;
 import jakarta.transaction.Transactional;

@@ -2,7 +2,7 @@ package domain.travel.travel_itinerary.service;
 
 import domain.travel.travel_itinerary.dto.province.ProvinceRequestDTO;
 import domain.travel.travel_itinerary.dto.province.ProvinceResponseDTO;
-import domain.travel.travel_itinerary.repository.custom_repository.province.PagingResult;
+import domain.travel.travel_itinerary.repository.custom_repository.PagingResult;
 
 import java.util.List;
 import java.util.UUID;

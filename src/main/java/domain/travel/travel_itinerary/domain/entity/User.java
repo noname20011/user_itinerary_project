@@ -1,19 +1,17 @@
 package domain.travel.travel_itinerary.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import domain.travel.travel_itinerary.domain.enums.RoleEnum;
 import domain.travel.travel_itinerary.helper.base.entiry.BaseEntityHasId;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import org.hibernate.stat.Statistics;
+import lombok.*;
 
 import java.util.List;
 
 @Entity
 @Table(name = "tbl_user")
-@Data
+@Getter
+@Setter
 @EqualsAndHashCode(of = {"id"}, callSuper = false)
 @AllArgsConstructor
 @NoArgsConstructor
@@ -36,21 +34,31 @@ public class User extends BaseEntityHasId {
     private RoleEnum role;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    @JsonManagedReference
     private List<Visited> visiteds;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    @JsonManagedReference
     private List<WhiteList> whiteLists;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    @JsonManagedReference
     private List<UserAchieveBadge> userAchieveBadges;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    @JsonManagedReference
     private List<UserChallengeProgress> userChallengeProgresses;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    @JsonManagedReference
     private List<LeaderBoard> leaderBoards;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.REMOVE)
+    @JsonManagedReference
     private Statistic statistic;
+
+//    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+//    @JsonManagedReference
+//    private List<UserNotificationSent> notificationsSent;
 
 }

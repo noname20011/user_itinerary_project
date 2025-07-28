@@ -9,7 +9,7 @@ import domain.travel.travel_itinerary.exception.NotFoundException;
 import domain.travel.travel_itinerary.helper.dto.FilePhotoDTO;
 import domain.travel.travel_itinerary.mapper.DestinationMapper;
 import domain.travel.travel_itinerary.repository.DestinationRepository;
-import domain.travel.travel_itinerary.repository.custom_repository.province.PagingResult;
+import domain.travel.travel_itinerary.repository.custom_repository.PagingResult;
 import domain.travel.travel_itinerary.service.DestinationPhotoService;
 import domain.travel.travel_itinerary.service.DestinationService;
 import jakarta.transaction.Transactional;
@@ -22,7 +22,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
