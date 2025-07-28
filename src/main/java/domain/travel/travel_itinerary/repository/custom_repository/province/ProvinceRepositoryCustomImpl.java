@@ -3,6 +3,7 @@ package domain.travel.travel_itinerary.repository.custom_repository.province;
 import domain.travel.travel_itinerary.domain.entity.Destination;
 import domain.travel.travel_itinerary.domain.entity.Province;
 import domain.travel.travel_itinerary.dto.province.ProvinceResponseDTO;
+import domain.travel.travel_itinerary.repository.custom_repository.PagingResult;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;

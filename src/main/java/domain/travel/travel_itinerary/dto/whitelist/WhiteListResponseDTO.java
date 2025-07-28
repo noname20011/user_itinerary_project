@@ -1,11 +1,9 @@
 package domain.travel.travel_itinerary.dto.whitelist;
 
+import domain.travel.travel_itinerary.domain.entity.Destination;
 import domain.travel.travel_itinerary.domain.entity.User;
-import domain.travel.travel_itinerary.dto.destination.DestinationRequestDTO;
-import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -15,16 +13,12 @@ import java.util.UUID;
 @Builder
 public class WhiteListResponseDTO implements Serializable {
 
-    @NotNull
     private UUID id;
 
-    @NotNull
-    private DestinationRequestDTO destination;
+    private Destination destination;
 
-    @NotNull
-    private User user;
+    private UUID userId;
 
-    @NotNull
-    private LocalDate addDate;
+    private LocalDate createdAt;
 
 }

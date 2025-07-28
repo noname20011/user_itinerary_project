@@ -1,11 +1,8 @@
 package domain.travel.travel_itinerary.service;
 
-import domain.travel.travel_itinerary.domain.entity.Destination;
 import domain.travel.travel_itinerary.dto.destination.DestinationRequestDTO;
 import domain.travel.travel_itinerary.dto.destination.DestinationResponseDTO;
-import domain.travel.travel_itinerary.dto.province.ProvinceRequestDTO;
-import domain.travel.travel_itinerary.dto.province.ProvinceResponseDTO;
-import domain.travel.travel_itinerary.repository.custom_repository.province.PagingResult;
+import domain.travel.travel_itinerary.repository.custom_repository.PagingResult;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;

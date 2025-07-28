@@ -6,7 +6,7 @@ import domain.travel.travel_itinerary.dto.destination.DestinationResponseDTO;
 import domain.travel.travel_itinerary.helper.base.dto.ResponseData;
 import domain.travel.travel_itinerary.helper.base.dto.ResponseDataPageable;
 import domain.travel.travel_itinerary.helper.validators.uuid_validation.ValidUUID;
-import domain.travel.travel_itinerary.repository.custom_repository.province.PagingResult;
+import domain.travel.travel_itinerary.repository.custom_repository.PagingResult;
 import domain.travel.travel_itinerary.service.DestinationService;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import jakarta.validation.Valid;

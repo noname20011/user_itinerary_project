@@ -1,5 +1,6 @@
 package domain.travel.travel_itinerary.helper.base.repository;
 
+import domain.travel.travel_itinerary.config.Translator;
 import domain.travel.travel_itinerary.exception.NotFoundException;
 import domain.travel.travel_itinerary.helper.utils.NullAwareBeanUtil;
 import org.springframework.data.domain.Page;
@@ -10,6 +11,7 @@ import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
+import java.lang.reflect.ParameterizedType;
 import java.util.List;
 import java.util.function.Function;
 
@@ -21,7 +23,14 @@ public interface BaseRepository<T, ID extends Serializable> extends JpaRepositor
     default T findByIdOrThrow(ID id) {
         return findById(id)
                 .orElseThrow(() ->
-                new NotFoundException(String.format("Entity with id %s not found", id)));
+                new NotFoundException(Translator.toLocale("entity.not.found", id)));
+    }
+
+    @Transactional(readOnly = true)
+    default T findByIdOrThrowWithMessage(ID id, String entityName) {
+        return findById(id)
+                .orElseThrow(() ->
+                        new NotFoundException(Translator.toLocale("exception.entity.not.found", entityName, id)));
     }
 
 

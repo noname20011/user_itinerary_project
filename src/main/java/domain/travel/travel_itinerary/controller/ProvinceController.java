@@ -6,7 +6,7 @@ import domain.travel.travel_itinerary.dto.province.ProvinceResponseDTO;
 import domain.travel.travel_itinerary.helper.base.dto.ResponseData;
 import domain.travel.travel_itinerary.helper.base.dto.ResponseDataPageable;
 import domain.travel.travel_itinerary.helper.validators.uuid_validation.ValidUUID;
-import domain.travel.travel_itinerary.repository.custom_repository.province.PagingResult;
+import domain.travel.travel_itinerary.repository.custom_repository.PagingResult;
 import domain.travel.travel_itinerary.service.ProvinceService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
