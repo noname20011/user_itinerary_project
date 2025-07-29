@@ -6,15 +6,30 @@ on:
       - main
 #  schedule:
 #    - '0 12 * * *' #auto execute at 12 a.m
-
 jobs:
   build:
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest]
-        java: [17]
+        os: [ ubuntu-latest, windows-latest ]
+        java: [ 17 ]
 
     runs-on: ${{matrix.os}}
+
+    services:
+      mysql:
+        image: mysql:8.0
+        ports:
+          - 3306:3306
+        env:
+          DB_DATABASE: user_travel_v1
+          DB_USER: ${{secrets.DB_USERNAME_DEV_ENV}}
+          DB_PASSWORD: ${{secrets.DB_PASSWORD_DEV_ENV}}
+          DB_ROOT_PASSWORD: ${{secrets.DB_PASSWORD_DEV_ENV}}
+        options: >-
+          --health-cmd="mysqladmin ping --silent"
+          --health-timeout=5s
+          --health-interval=10s
+          --health-retries=5
 
     steps:
       - uses: actions/checkout@v4
