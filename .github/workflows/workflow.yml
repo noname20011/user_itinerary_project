@@ -2,8 +2,7 @@ name: 'JAVA CI'
 
 on:
   pull_request:
-    branches:
-      - main
+    branches: [main]
 #  schedule:
 #    - '0 12 * * *' #auto execute at 12 a.m
 jobs:
@@ -13,6 +12,7 @@ jobs:
         os: [ ubuntu-latest, windows-latest ]
         java: [ 17 ]
 
+    timeout-minutes: 15 #15mins to cancel, dont' crack
     runs-on: ${{matrix.os}}
 
     services:
@@ -64,3 +64,17 @@ jobs:
         with:
           name: app-jar
           path: target/*.jar
+#  create-pr:
+#    runs-on: ${{matrix.os}}
+#    steps:
+#      - name: Checkout
+#        uses: actions/checkout@v4
+#
+#      - name: Create pull request
+#        uses: peter-evans/create-pull-request@v5
+#        with:
+#          token: '${{ github.token }}'
+#          base: main
+#          branch: ${{github.ref_name}}
+#          title: Auto PR from ${{github.ref_name}}
+#          body: 'Automated changes by [create-pull-request] GitHub action'
