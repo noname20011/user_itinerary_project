@@ -9,7 +9,7 @@ jobs:
   build:
     strategy:
       matrix:
-        os: [ ubuntu-latest ]
+        os: [ ubuntu-latest, windows-latest ]
         java: [ 17 ]
 
     timeout-minutes: 15 #15mins to cancel, dont' crack
@@ -21,10 +21,10 @@ jobs:
         ports:
           - 3306:3306
         env:
-          DB_DATABASE: user_travel_v1
-          DB_USER: test
-          DB_PASSWORD: 123456
-          DB_ROOT_PASSWORD: 123456
+          MYSQL_DATABASE: user_travel_v1
+          MYSQL_USER: test
+          MYSQL_PASSWORD: 123456
+          MYSQL_ROOT_PASSWORD: 123456
         options: >-
           --health-cmd="mysqladmin ping --silent"
           --health-timeout=5s
