@@ -12,7 +12,7 @@ jobs:
       matrix:
         os: [ ubuntu-latest, windows-latest ]
         java: [ 17 ]
-
+    timeout-minutes: 15 #15mins to cancel, dont' crack
     runs-on: ${{matrix.os}}
 
     services:
