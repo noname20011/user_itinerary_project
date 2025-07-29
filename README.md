@@ -1,1 +1,1 @@
-![Java CI](https://github.com/<your-username>/<your-repo>/actions/workflows/<workflow-file>.yml/badge.svg)
+![Java CI](https://github.com/noname20011/user_itinerary_project/actions/workflows/workflow.yml/badge.svg)

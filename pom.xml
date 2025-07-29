@@ -11,7 +11,7 @@
 	<groupId>domain.travel</groupId>
 	<artifactId>travel-itinerary</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name>Travel Itinerary</name>
 		<description>Project about Travel Itinerary of traveler can save all the moment as photo, reviews, places visited and share with everyone...... </description>
 	<url/>

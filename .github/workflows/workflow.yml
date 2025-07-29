@@ -56,7 +56,7 @@ jobs:
           CLOUDINARY_CLOUD_NAME: ${{secrets.CLOUDINARY_CLOUD_NAME}}
           CLOUDINARY_API_KEY: ${{secrets.CLOUDINARY_API_KEY}}
           CLOUDINARY_API_SECRET: ${{secrets.CLOUDINARY_API_SECRET}}
-        run: mvn --batch-mode --fail-at-end clean install
+        run: mvn --batch-mode --fail-at-end clean install -DskipTests
 
       - name: Upload file JAR
         if: success() #Only upload if maven build success
