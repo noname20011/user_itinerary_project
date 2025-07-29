@@ -22,7 +22,7 @@ jobs:
           - 3306:3306
         env:
           MYSQL_DATABASE: user_travel_v1
-          MYSQL_USER: test
+          MYSQL_USER: root
           MYSQL_PASSWORD: 123456
           MYSQL_ROOT_PASSWORD: 123456
         options: >-
