@@ -80,7 +80,7 @@ jobs:
   deploy:
     needs: build
     runs-on: ${{needs.build.outputs.os}}
-    if: github.ref_name == 'refs/heads/main'
+    if: github.ref_name == 'main'
 
     steps:
       - name: Deploy to Render
