@@ -11,6 +11,9 @@ jobs:
       matrix:
         os: [ ubuntu-latest ]
         java: [ 17 ]
+    outputs:
+      os: ${{matrix.os}}
+      java: ${{matrix.java}}
 
     timeout-minutes: 15 #15mins to cancel, dont' crack
     runs-on: ${{matrix.os}}
@@ -64,6 +67,27 @@ jobs:
         with:
           name: app-jar
           path: target/*.jar
+
+#      - name: Create Github Releases
+#        uses: softprops/action-gh-release@v1
+#        with:
+#          name: Release ${{github.ref_name}}
+#          tag_name: ${{github.ref_name}}
+#          files: target/*.jar
+#        env:
+#          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
+  deploy:
+    needs: build
+    runs-on: ${{needs.build.outputs.os}}
+    if: github.ref_name == 'refs/heads/main'
+
+    steps:
+      - name: Deploy to Render
+        run: curl -X POST ${{secrets.RENDER_DEPLOY_HOOK}}
+
+
+
 #  create-pr:
 #    runs-on: ${{matrix.os}}
 #    steps:
