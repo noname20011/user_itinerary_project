@@ -1,0 +1,1 @@
+![Java CI](https://github.com/<your-username>/<your-repo>/actions/workflows/<workflow-file>.yml/badge.svg)

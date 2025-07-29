@@ -1,0 +1,50 @@
+name: "JAVA CI"
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [ ubuntu-latest, windows-latest ]
+        java: [ 11, 17 ]
+
+    runs-on: ${{matrix.os}}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: ${{matrix.java}}
+          distribution: 'temurin'
+
+      - name: Cache Maven packages
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2/repository
+          key: ${{runner.os}}-maven-${{hashFiles('**/pom.xml')}}
+          restore-keys: |
+            ${{runner.os}}-maven-
+
+      - name: Maven build
+        env:
+          DB_URL: ${{secrets.DB_URL_DEV_ENV}}
+          DB_USERNAME: ${{secrets.DB_USERNAME_DEV_ENV}}
+          DB_PASSWORD: ${{secrets.DB_PASSWORD_DEV_ENV}}
+          CLOUDINARY_CLOUD_NAME: ${{secrets.CLOUDINARY_CLOUD_NAME}}
+          CLOUDINARY_API_KEY: ${{secrets.CLOUDINARY_API_KEY}}
+          CLOUDINARY_API_SECRET: ${{secrets.CLOUDINARY_API_SECRET}}
+        run: mvn --batch-mode --fail-at-end clean install
+
+      - name: Upload JAR
+        if: success() #Onle upload if build success
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-jar
+          path: target/*.jar
+
+
