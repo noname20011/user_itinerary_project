@@ -22,9 +22,9 @@ jobs:
           - 3306:3306
         env:
           DB_DATABASE: user_travel_v1
-          DB_USER: ${{secrets.DB_USERNAME_DEV_ENV}}
-          DB_PASSWORD: ${{secrets.DB_PASSWORD_DEV_ENV}}
-          DB_ROOT_PASSWORD: ${{secrets.DB_PASSWORD_DEV_ENV}}
+          DB_USER: test
+          DB_PASSWORD: 123456
+          DB_ROOT_PASSWORD: 123456
         options: >-
           --health-cmd="mysqladmin ping --silent"
           --health-timeout=5s
