@@ -14,7 +14,7 @@ public class BadgeMapperHelper {
     private final TypeBadgeRepository typeBadgeRepository;
 
     @Named("getTypeBadgeById")
-    TypeBadge getTypeBadgeById(UUID id) {
+    public TypeBadge getTypeBadgeById(UUID id) {
         return typeBadgeRepository.findByIdOrThrow(id);
     }
 }

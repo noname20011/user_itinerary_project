@@ -13,5 +13,5 @@ import java.util.UUID;
 @NoArgsConstructor
 public class ChallengeOfBadgeID {
     private UUID challenge;
-    private String badge;
+    private UUID badge;
 }

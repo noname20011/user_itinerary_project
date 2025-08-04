@@ -25,7 +25,7 @@ public class TypeBadge  extends BaseEntityHasId {
     @Column(name = "code", nullable = false)
     private String code;
 
-    @OneToMany(mappedBy = "type_badge")
+    @OneToMany(mappedBy = "typeBadge")
     @JsonManagedReference
     private Set<Badge> badges;
 }
