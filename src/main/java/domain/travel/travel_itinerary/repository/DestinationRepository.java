@@ -1,7 +1,6 @@
 package domain.travel.travel_itinerary.repository;
 
 import domain.travel.travel_itinerary.domain.entity.Destination;
-import domain.travel.travel_itinerary.dto.destination.DestinationResponseDTO;
 import domain.travel.travel_itinerary.helper.base.repository.BaseRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

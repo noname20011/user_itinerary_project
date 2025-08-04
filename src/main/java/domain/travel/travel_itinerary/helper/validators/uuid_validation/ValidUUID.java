@@ -14,7 +14,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Target({PARAMETER,FIELD, TYPE_USE, TYPE_PARAMETER })
 public @interface ValidUUID {
 
-    String message() default "Invalid UUID";
+    String message() default "Invalid type of UUID";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }

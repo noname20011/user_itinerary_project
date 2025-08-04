@@ -28,7 +28,7 @@ public class UserAchieveBadge extends BaseEntityNoId {
     @JoinColumn(name = "badge_id", nullable = false)
     private Badge badge;
 
-    @Column(name = "status", columnDefinition = "ENUM('PROGRESSING', 'COMPLETED')")
+    @Column(name = "status", columnDefinition = "ENUM('IN_PROGRESS', 'COMPLETED')")
     @Enumerated(EnumType.STRING)
     private StatusProgressEnum status;
 

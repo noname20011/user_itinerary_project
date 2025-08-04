@@ -55,8 +55,7 @@ public class Destination extends BaseEntityHasId {
     @JsonManagedReference
     private List<WhiteList> whiteLists;
 
-//    public Destination setWithId (UUID id) {
-//        this.setId(id);
-//        return this;
-//    }
+    @OneToMany(mappedBy = "destination")
+    @JsonManagedReference
+    private List<UserNearbyLog> userNearbyLogs;
 }
