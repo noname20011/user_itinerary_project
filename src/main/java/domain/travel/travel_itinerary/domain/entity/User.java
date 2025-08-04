@@ -47,7 +47,7 @@ public class User extends BaseEntityHasId {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     @JsonManagedReference
-    private List<UserChallengeProgress> userChallengeProgresses;
+    private List<UserChallengeStatus> userChallengeProgresses;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     @JsonManagedReference
@@ -57,8 +57,12 @@ public class User extends BaseEntityHasId {
     @JsonManagedReference
     private Statistic statistic;
 
-//    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
-//    @JsonManagedReference
-//    private List<UserNotificationSent> notificationsSent;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    @JsonManagedReference
+    private List<UserNotificationSent> notificationsSent;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    @JsonManagedReference
+    private List<UserNearbyLog> userNearbyLogs;
 
 }

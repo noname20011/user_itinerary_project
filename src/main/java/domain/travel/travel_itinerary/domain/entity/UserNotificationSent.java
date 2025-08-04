@@ -29,4 +29,7 @@ public class UserNotificationSent extends BaseEntityHasId {
     @Enumerated(EnumType.STRING)
     private NotificationTypeEnum notificationType;
 
+    @Column(name = "is_read")
+    private Boolean isRead;
+
 }
